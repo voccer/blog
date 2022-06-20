@@ -22,11 +22,7 @@ Quá trình tấn công sẽ diễn ra ở 3 giai đoạn:
 
 Nguyên lý cơ bản là thế, bây giờ chúng ta cùng thử xem nhé. Lưu ý chỉ áp dụng với modem của bản thân.
 Có khá nhiều tool hỗ trợ việc tạo phising có thể kể tới như: WiFiSlax, WiFiPhisher ...
-Ở đây mình sử dụng WiFiPhiser.
-Công cụ:
-
-- Air-crack: công cụ chuyển chế độ monitor
-- WifiPhiser:
-- mdk3: công cụ tấn công gói tin tới AP
+Ở đây mình sử dụng <a href='https://github.com/wifiphisher/wifiphisher'>trang chủ</a>.
 
 Như cách tấn công bằng từ điển, chúng ta cần có 1 card wifi hỗ trợ monitor, ở đây mình vẫn chọn TP-link WN722N V1.
+
