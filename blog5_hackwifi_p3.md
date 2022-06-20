@@ -13,10 +13,10 @@ Phương pháp này gọi là Phishing.
 Sau khi xác định được victim, hacker sẽ thưc hiện các tấn công <a href='https://www.pandasecurity.com/en/mediacenter/security/what-is-an-evil-twin-attack/'> evil twin </a>. Điều hướng toàn bộ yêu cầu HTTP (lưu ý là chỉ điều hướng http) đến 1 trang khác đinh chuẩn bị sẵn để lừa đảo.
 
 Quá trình tấn công sẽ diễn ra ở 3 giai đoạn:
+
 - Victim bị ngắt kết nối và router bị dừng hoạt động
 - Xuất hiện AP(access point) khác có tên tương tự AP cũ, victim ấn vào và đươc điều hướng tới trang có sẵn
 - Victim nhập mật khẩu và sập bẫy.
-
 
 ## Công cụ và thực hành
 
@@ -28,10 +28,26 @@ Như cách tấn công bằng từ điển, chúng ta cần có 1 card wifi hỗ
 
 <img src="https://raw.githubusercontent.com/Ducvoccer/blog/main/images/hack-wifi-p3/cardwifi.jpg">
 
-
 Kiểm tra card wifi
 
 ```
 $ ifconfig
 ```
 
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/ifconfig.png?raw=true">
+
+Chúng ta có 1 card là wlan0
+
+start wifiphisher với card là wlan0
+
+```
+# wifiphiser -i wlan0
+```
+
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/start_wifiphisher.png?raw=true">
+
+choose victim
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/choose_victim.png?raw=true">
+
+choose method
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/choose_method_phishing.png?raw=true">
