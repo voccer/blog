@@ -6,7 +6,17 @@
 
 Với đại đa số người dùng phổ thông, không có sự hiểu biết nhiều về công nghệ và hay mất đi sự cảnh giác. Lợi dụng sơ hở này, dựa trên nguyên lý kẻ thứ 3, chúng ta tạo 1 AP ảo với tên giống hệt AP của victim, đồng thời tấn công liên tục vào AP victim để nó bị ngừng hoạt động. Khi đó, người dùng sẽ không thể kết nối với AP thật được nữa, và sẽ xuất hiện 1 AP ảo, nếu họ nhấn vào và nhập lại mật khẩu thì ola chúng ta đã thành công.
 
-Phương pháp này gọi là Phishing
+Phương pháp này gọi là Phishing.
+
+## Nguyên lý hoạt động
+
+Sau khi xác định được victim, hacker sẽ thưc hiện các tấn công <a href='https://www.pandasecurity.com/en/mediacenter/security/what-is-an-evil-twin-attack/'> evil twin </a>. Điều hướng toàn bộ yêu cầu HTTP (lưu ý là chỉ điều hướng http) đến 1 trang khác đinh chuẩn bị sẵn để lừa đảo.
+
+Quá trình tấn công sẽ diễn ra ở 3 giai đoạn:
+- Victim bị ngắt kết nối và router bị dừng hoạt động
+- Xuất hiện AP(access point) khác có tên tương tự AP cũ, victim ấn vào và đươc điều hướng tới trang có sẵn
+- Victim nhập mật khẩu và sập bẫy.
+
 
 ## Công cụ và thực hành
 
