@@ -51,3 +51,22 @@ choose victim
 
 choose method
 <img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/choose_method_phishing.png?raw=true">
+
+after choose victim
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/after_select_victim.png?raw=true">
+
+wifi fake
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/wifi_double.png?raw=true">
+
+update firmware page
+after choose victim
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/update_firmwarge_page.png?raw=true">
+
+update process
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/update_process.png?raw=true">
+
+update time
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/update_time.png?raw=true">
+
+mật khẩu gửi lên server
+<img src="https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p3/rs.png?raw=true">
