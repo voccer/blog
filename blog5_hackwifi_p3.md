@@ -26,3 +26,12 @@ Có khá nhiều tool hỗ trợ việc tạo phising có thể kể tới như:
 
 Như cách tấn công bằng từ điển, chúng ta cần có 1 card wifi hỗ trợ monitor, ở đây mình vẫn chọn TP-link WN722N V1.
 
+<img src="https://raw.githubusercontent.com/Ducvoccer/blog/main/images/hack-wifi-p3/cardwifi.jpg">
+
+
+Kiểm tra card wifi
+
+```
+$ ifconfig
+```
+
