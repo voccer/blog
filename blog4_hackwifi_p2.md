@@ -27,7 +27,7 @@ Tắt toàn bộ tiến trình sử dụng mạng
 
 Start monitor cho card có tên là wlan0
 ```shell
-# airmon-ng start: wlan0
+# airmon-ng start wlan0
 ```
 <img src="https://crowi.pionero.io/files/610ee1381120630068a6a66c" height="150px">
 
@@ -76,14 +76,14 @@ Trong quá trình tấn công, có 1 vài modem chặn quá trình tấn công *
 # macchanger -r wlan0mon
 # ifconfig wlan0mon up
 ```
-Tham số -r để chỉ định sinh ra ngẫu nhiên. 
+Tham số -r để chỉ định sinh ra ngẫu nhiên.
 ![image.png](https://crowi.pionero.io/files/612b953b01bb4b0067d0ad94)
 
 
 Một số modem có cơ chế tự động tắt WPS nếu nhận quá nhiều attempts, nếu kiểm tra thấy WPS đã bị lock, chúng ta cần tấn công **DDOS** để modem reset và bât lại WPS. Ở đây, ta sử dụng Mdk3 để tấn công.
 Chúng ta có thể sử dụng các mode a b d m để tấn công, hoặc kết hợp toàn bộ, chi tiết xem thêm ở <a href="https://kalitut.com/mdk3-examples-tutorial/">đây</a>.
 ## Kết quả
-Sau tầm 15p chúng ta đã có kết quả, mặc dù password đã đặt rất khó: *@&wifi#nay#deo#the#hack#1998$$* 
+Sau tầm 15p chúng ta đã có kết quả, mặc dù password đã đặt rất khó: *@&wifi#nay#deo#the#hack#1998$$*
 nhưng sử dụng WPS vẫn chỉ mất có 15p ^_^.
 ![image.png](https://crowi.pionero.io/files/612b923b01bb4b0067d0ad92)
 
